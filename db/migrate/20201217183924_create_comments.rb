@@ -6,8 +6,8 @@ class CreateComments < ActiveRecord::Migration[6.0]
       t.string :content
 
       t.timestamps
-      add_foreign_key :post
-      add_foreign_key :author
+      add_foreign_key :comments, :posts, column: :post
+      add_foreign_key :comments, :users, column: :author
     end
   end
 end

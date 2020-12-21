@@ -1,7 +1,23 @@
 Rails.application.routes.draw do
-  resources :comments
-  resources :posts
-  resources :users
-  get 'session/login'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  get    '/login'     => 'session#new'
+  post   '/login'     => 'session#create'
+ 
+  get    '/logout'    => 'session#destroy'
+
+  get    '/signup'    => 'users#new'
+  post   '/signup'    => 'users#create'
+
+  get    '/profile'   => 'users#profile'
+  get    'users/profile'
+ 
+  get    '/new' => 'posts#last'
+  get    '/posts/show'
+
+  get    '/posts/new'
+  post   '/posts'     => 'posts#create'
+  post   '/comments'  => 'comments#create'
+
+  get    'posts/remove'
+
+  root   'posts#last'
 end

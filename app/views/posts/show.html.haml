@@ -1,15 +1,35 @@
-%p#notice= notice
+%div{class: "post_block"}
+  %div{class: "post_head"}
+    %div{class: "post_title"}
+      %a{href: "/posts/show?id="+@post.id.to_s, class: 'h3'}= @post.title
+    %div{class: "post_stat"}
+      %strong= t('author')+':' %p
+      - begin
+        = User.where(id: @post.author).first.name
+      - rescue
+        = 'Author not found'
+    
+  %div
+    - cache @post do
+      - @post.content.split("\n").each do |par|
+        %p= par
+    
+  = form_for :comment, url: '/comments' do |f|
+    %p= t(:'add new comment')
+    = f.hidden_field :post, 
+      value: @post.id
+    = f.text_area :content, 
+      placeholder: t('write here'), rows: "4", style: 'width: 100%'
+    = f.submit t('create'), 
+      class: 'btn btn-info'
 
-%p
-  %b Title:
-  = @post.title
-%p
-  %b Content:
-  = @post.content
-%p
-  %b Author:
-  = @post.author
-
-= link_to 'Edit', edit_post_path(@post)
-\|
-= link_to 'Back', posts_path
+  - Comment.where(post: @post.id).each do |comm|
+    -begin
+      - cache comm do
+        %div{class: "row comment-block"}
+          %div{name: "comment_stat", class: 'col-sm-auto'}
+            %p= '@'+User.where(id: comm.author).first.name+':'
+          %div{name: "comment_wraper", class: 'col-sm-auto'}
+            %div= comm.content
+    - rescue
+      = 'comment error'

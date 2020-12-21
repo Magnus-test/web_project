@@ -1,5 +1,14 @@
-%h1 New post
-
-= render 'form'
-
-= link_to 'Back', posts_path
+-# app/views/post/new.html.erb
+= form_for :post, url: '/posts' do |f|
+  %h1= t(:'add post')
+  %br
+  
+  .form-group
+    = f.label t('title')+':', for: "title"
+    = f.text_field :title, placeholder: 'Post title'
+    
+  .form-group
+    = f.label t('content')+':', for: "main_body"
+    = f.text_area :content, class: "form-control",  rows: "5", id: "main_body"
+    
+  = f.submit t('create'), class: 'btn btn-info'

@@ -1,0 +1,51 @@
+@import "bootstrap";
+body {
+  background-color: --light;
+}
+
+.container {
+  margin: 0 auto;
+  margin-bottom: 4pt;
+  text-overflow: ellipsis;
+  font-size: 1.4rem;
+  color: --dark;
+}
+
+.container, form, .post_block, .post_wraper, .comment-block{
+  padding: 8pt;
+  border-radius: 8pt;
+}
+
+input, textarea{
+  border-radius: 5px;
+  border: 0px;
+}
+
+form {
+  background-color: #e4e4e4;
+  text-align: center;
+}
+
+.post_block{
+  margin-top: 8pt;
+  margin-bottom: 8pt;
+  background-color: #e4e4e4;
+}
+
+.comment-block{
+  margin-top: 8pt;
+  margin-bottom: 8pt;
+  margin-left: 8pt;
+  margin-right: 8pt;
+}
+
+.btn-info {
+  background-color: #095cb1;
+  border-color: #409af7;
+}
+
+.btn-info:hover {
+  color: #fff;
+  background-color: #398de2;
+  border-color: #5ca4ec;
+}

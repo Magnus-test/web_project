@@ -1,0 +1,47 @@
+!!!
+%html
+  %head
+    %title Page
+    = csrf_meta_tags
+    %meta{charset: "utf-8"}
+    %meta{content: "width=device-width; initial-scale=1", name: "viewport"}
+    = stylesheet_link_tag    'application', 
+                             'data-turbolinks-track': 'reload',
+                              media: 'all'
+    = javascript_pack_tag 'application', 
+                             'data-turbolinks-track': 'reload'
+    
+  %body
+    %nav.navbar.navbar-expand-lg.navbar-dark{:style => "background-color: #232323"}
+      %button.navbar-toggler{"data-target": "#navbarSupportedContent", "data-toggle": "collapse"}
+        %span.navbar-toggler-icon
+      %a.navbar-brand{:href => "/"} BMSTU-blog
+      #navbarSupportedContent.collapse.navbar-collapse 
+        %ul.navbar-nav.mr-auto
+          - if current_user
+            %li.nav-item
+              %a.nav-link{:href => "/profile"}
+                = t('user')+': @'+current_user.name.downcase
+            %li.nav-item
+              %a.nav-link{:href => "/posts/new"}
+                = t('create post')
+            %li.nav-item
+              %a.nav-link{:href => "/"}
+                = t('all posts')
+            %li.nav-item
+              %a.nav-link{:href => "?locale=en"}
+                = 'EN'
+            %li.nav-item
+              %a.nav-link{:href => "?locale=ru"}
+                = 'РУ'
+      - unless current_user
+        %a.btn.btn-info{:href => "/signup"}
+          = t(:'signup') 
+        %a.btn.btn-info.align-rigth{:href => "/login"}
+          = t(:'login')
+      - else    
+        %a.btn.btn-info.align-rigth{:href => "/logout"}
+          = t(:'logout')
+    
+    .container
+      = yield

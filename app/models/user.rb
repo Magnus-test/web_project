@@ -6,7 +6,7 @@ class User < ApplicationRecord
               format: { with: /\A[a-z]+\z/ }
   
     validates :email,
-              presence: true, uniqueness: true 
+              presence: true, uniqueness: true,
               email_format: { message: 'invalid email format' }
   
     validates :password_digest,
